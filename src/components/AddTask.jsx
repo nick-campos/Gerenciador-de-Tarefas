@@ -1,7 +1,43 @@
-function AddTask() {
+import { useState } from "react";;
 
-    <h1>Adicione sua tarefa</h1>
+function AddTask({onAddTaskSubmit}) {
+    const [title, setTitle] = useState("");
+    const [description, setDescription] = useState("");
 
+    return (
+    <div 
+        className="space-y-3  p-6 bg-slate-300 rounded-md shadow flex flex-col">
+
+        <input 
+            type="text" 
+            placeholder="Digite o título da tarefa" 
+            className="border border-slate-100 outline-slate-400 px-3 py-2 rounded-md" 
+            value={title}
+            onChange={(event) => setTitle(event.target.value)}>
+        </input>
+
+        <input 
+            type="text" 
+            placeholder="Digite a descrição da tarefa" 
+            className="border border-slate-100 outline-slate-400 px-3 py-2 rounded-md" 
+            value={description}
+            onChange={(event) => setDescription(event.target.value)}>
+        </input>
+
+        <button 
+            onClick={() => { 
+                //Verificar se os campos foram preenchidos
+                if (!title.trim() || !description.trim()) {
+                    return alert("Preencha os campos obrigatórios");
+                }
+                onAddTaskSubmit(title, description);
+                setTitle("");
+                setDescription("");
+            }}
+            className="bg-slate-700 text-white px-4 py-2 rounded-md font-medium">Adicionar
+        </button>
+    </div>
+    );
 }
 
 export default AddTask

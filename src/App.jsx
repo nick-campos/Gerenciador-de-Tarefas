@@ -35,11 +35,21 @@ function onTaskClick(taskId) {
     setTasks(newTasks);
   }
 
+  function onAddTaskSubmit (title, description) {
+    const newTask = {
+      id: tasks.length + 1,
+      title,
+      description,
+      isCompleted: false,
+    };
+    setTasks([ ...tasks, newTask]);
+  }
+
   return (
     <div className="w-screen h-screen bg-sky-950 flex justify-center p-6">
-      <div className="w-[500px] ">
+      <div className="w-[500px] space-y-3">
         <h1 className="text-3xl text-neutral-50 font-bold text-center">Gerenciador de Tarefas</h1>
-        <AddTask />
+        <AddTask onAddTaskSubmit={onAddTaskSubmit} />
         <Tasks tasks={tasks} onTaskClick={onTaskClick} onDeleteTaskClick={onDeleteTaskClick}/>
       </div>
     </div>
